@@ -1,38 +1,298 @@
+/* App.css */
 .App {
+  max-width: 600px;
+  margin: auto;
+  /* font-family: Arial, sans-serif; */
+  padding: 20px;
+}
+
+h1, h2 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+section {
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #03162f;
+  color: #ffffff;
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1, h2 {
+  color: #0066ff; /* Accent Blue */
+}
+
+p, label {
+  color: #fff; /* Soft Gray */
+}
+
+/* Button Container Styling */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  margin-top: 20px; /* Adds space above the button */
+}
+
+/* Button Styling */
+.button {
+  background: linear-gradient(45deg, #1db954, #0066ff);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background: #0066ff; /* Accent Blue */
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.5);
+  transform: scale(1.05);
+}
+
+
+.card {
+  background-color: #1a1f2e; /* Slightly lighter than main background */
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  color: #b0b3b8; /* Soft Gray */
+}
+
+.card h3, .card h2 {
+  color: #0066ff; /* Accent Blue */
+}
+
+
+/* Input Field Styling */
+.input-field {
+  width: 100%; /* Full width of the container */
+  padding: 12px 18px; /* Extra padding for a more substantial look */
+  border-radius: 8px; /* Smooth rounded corners */
+  border: 1px solid #b0b3b8; /* Soft gray border */
+  background-color: #1a1f2e; /* Slightly lighter than the main background */
+  color: #ffffff; /* White text for readability */
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif; /* Consistent font styling */
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; /* Smooth transition */
+}
+
+.input-field::placeholder {
+  color: #b0b3b8; /* Soft gray for placeholder text */
+  opacity: 0.8; /* Slightly lighter for a subtle hint */
+}
+
+.input-field:hover {
+  background-color: #1f2433; /* Slightly brighter on hover */
+  border-color: #0066ff; /* Accent blue on hover */
+}
+
+.input-field:focus {
+  outline: none;
+  background-color: #1f2433; /* Maintain hover effect on focus */
+  border-color: #0066ff; /* Accent blue border on focus */
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.5); /* Soft glow on focus */
+}
+
+
+/* Game Picks Section */
+.game-pick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1f2e; /* Slightly lighter background for contrast */
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-pick:hover {
+  transform: scale(1.02); /* Slightly enlarges on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Adds a deeper shadow on hover */
+}
+
+.team {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0 20px; /* Space between teams */
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.team:hover {
+  transform: scale(1.05); /* Slightly enlarges on hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.team-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.team-name {
+  color: #b0b3b8; /* Soft gray */
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.vs {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0 15px;
+}
+
+/* Player Picks Layout */
+.player-pick {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a1f2e; /* Matches game pick card color */
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-pick:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between logo and text */
+}
+
+.player-name {
+  color: #b0b3b8; /* Soft gray */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.player-team {
+  color: #b0b3b8;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.player-stat {
+  color: #1db954; /* Vibrant green for the stat value */
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.player-pick-options {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.player-pick-options label {
+  color: #b0b3b8;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+  accent-color: #1db954; /* Green accent for radio buttons */
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 767px) {
+  .player-pick {
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center;
+    padding: 20px; /* Slightly more padding for readability */
   }
-  to {
-    transform: rotate(360deg);
+
+  .player-info {
+    gap: 5px;
+    margin-bottom: 10px;
+    align-items: center;
   }
+
+  .player-pick-options {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 10px; /* Space between "Over" and "Under" options */
+  }
+
+
+}
+
+@media (max-width: 494px){
+  .card{
+    margin: 20px -7px;
+    padding: 20px 5px;
+  }
+  .player-team{
+    display: none;
+  }
+
+
+.player-name {
+  font-size: 14px;
+}
+}
+
+/* Custom Radio Button Styling */
+input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b0b3b8; /* Soft gray border */
+  border-radius: 50%; /* Round shape for radio buttons */
+  background-color: #1a1f2e; /* Matches the background */
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  margin-right: 8px; /* Space between radio button and label */
+}
+
+input[type="radio"]:checked {
+  background-color: #1db954; /* Green background when selected */
+  border-color: #1db954; /* Green border when selected */
+}
+
+input[type="radio"]:hover {
+  border-color: #0066ff; /* Accent blue on hover */
+}
+
+/* Inner Dot for Selected Radio Button */
+input[type="radio"]:checked::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #ffffff; /* White dot for contrast */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.triller-gif{
+  max-width: 100%;
 }

@@ -1,13 +1,57 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Button Styling */
+.button {
+  background: linear-gradient(45deg, #224adb, #1a3db7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.button:hover {
+  background: #224adb;
+  box-shadow: 0 0 8px rgba(34, 74, 219, 0.8);
+  transform: scale(1.05);
+}
+
+
+.navbar {
+  background-color: #1a1f2e;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  color: #b0b3b8;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #0066ff; /* Accent Blue */
+}
+
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b0b3b8;
+  border-radius: 4px;
+  background-color: #1a1f2e;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 8px; /* Space below the checkbox */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #1db954; /* Vibrant green to indicate selection */
+  border-color: #1db954;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #0066ff; /* Accent blue on hover */
 }
