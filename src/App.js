@@ -72,7 +72,7 @@ function App() {
   return (
     <div className="App">
        <img src={logo} alt="loading..." className='triller-gif'/>
-     <h1>Triller Pickem</h1>
+     <h1>Triller Pickem </h1>
       
       <section className="card">
         <h2>Game Picks</h2>
