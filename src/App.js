@@ -1,9 +1,11 @@
 // App.js
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import emailjs from 'emailjs-com';
-import TeamPicks from './TeamPicks';
-import PlayerPicks from './PlayerPicks';
-import './App.css';
+import MainPage from './MainPage';
+import Admin from './Admin';
+import { db, ref, push } from './firebase';
+import  './App.css'
 
 // Your player data
 const players = [
@@ -12,7 +14,7 @@ const players = [
 ];
 
 function App() {
-  const [games, setGames] = useState([]); // Start as an empty array
+  const [games, setGames] = useState([]);
   const [picks, setPicks] = useState({});
   const [overUnder, setOverUnder] = useState({});
   const [tiebreaker, setTiebreaker] = useState('');
@@ -23,10 +25,8 @@ function App() {
       try {
         const today = new Date();
         const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
         const apiUrl = `https://api.balldontlie.io/v1/games?start_date=${formattedDate}&end_date=${formattedDate}`;
         
-        // Make the request with the API key in the headers
         const response = await fetch(apiUrl, {
           headers: {
             'Authorization': `7a839f49-89fc-405d-b6f3-bbc69abe42ad`,
@@ -39,7 +39,6 @@ function App() {
         }
 
         const data = await response.json();
-
         const formattedGames = data.data.map((game) => ({
           team1: { name: game.home_team.abbreviation, fullName: game.home_team.full_name },
           team2: { name: game.visitor_team.abbreviation, fullName: game.visitor_team.full_name }
@@ -70,79 +69,63 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const selectedTeams = Object.keys(picks).filter((team) => picks[team]);
+    const formattedPlayerPicks = players.map((player) => {
+      const choice = overUnder[player.name];
+      if (choice) {
+        return {
+          playerName: player.name,
+          team: player.team,
+          stat: player.stat,
+          value: player.value,
+          choice
+        };
+      }
+      return null;
+    }).filter((entry) => entry);
 
-    const selectedTeams = Object.keys(picks)
-      .filter((team) => picks[team])
-      .join('\n');
-
-    const formattedPlayerPicks = players
-      .map((player) => {
-        const choice = overUnder[player.name];
-        if (choice) {
-          return `${player.name} (${player.team}) ${player.stat} ${player.value}: <b>${choice}</b>`;
-        }
-        return null;
-      })
-      .filter((entry) => entry)
-      .join('\n');
-
-    const templateParams = {
+    const pickData = {
       name,
       tiebreaker,
       teamPicks: selectedTeams,
       playerPicks: formattedPlayerPicks,
+      timestamp: new Date().toISOString()
     };
 
-    emailjs.send('service_b3v5xwo', 'template_cu6i14j', templateParams, 'ozqj7nITvnSU_Bw-u')
+    push(ref(db, 'picks/'), pickData)
       .then(() => {
-        alert('Submission sent successfully!');
+        alert('Picks saved to database successfully!');
       })
       .catch((error) => {
-        alert('Failed to send submission.');
-        console.error('EmailJS Error:', error);
+        alert('Failed to save picks to database.');
+        console.error('Firebase Error:', error);
       });
   };
 
   return (
-    <div className="App">
-      <h1>Triller Pick'em</h1>
-
-      <section className="card">
-        <h2>Game Picks</h2>
-        <TeamPicks games={games} picks={picks} onPickChange={handlePickChange} />
-      </section>
-
-      <section className="card">
-        <h2>Player Picks</h2>
-        <PlayerPicks players={players} overUnder={overUnder} onOverUnderChange={handleOverUnderChange} />
-      </section>
-
-      <section className="card input-section">
-        <h2>Tiebreaker</h2>
-        <input
-          type="text"
-          placeholder="Total score for Spurs vs Clippers"
-          value={tiebreaker}
-          className="input-field"
-          onChange={(e) => setTiebreaker(e.target.value)}
+    <Router>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <MainPage 
+              games={games}
+              picks={picks}
+              handlePickChange={handlePickChange}
+              players={players}
+              overUnder={overUnder}
+              handleOverUnderChange={handleOverUnderChange}
+              tiebreaker={tiebreaker}
+              setTiebreaker={setTiebreaker}
+              name={name}
+              setName={setName}
+              handleSubmit={handleSubmit}
+            />
+          } 
         />
-      </section>
-
-      <section className="card input-section">
-        <h2>Your Name</h2>
-        <input
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="input-field"
-        />
-        <section className="button-container">
-          <button type="button" onClick={handleSubmit} className="button">Submit</button>
-        </section>
-      </section>
-    </div>
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </Router>
   );
 }
 
