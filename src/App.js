@@ -5,7 +5,7 @@ import emailjs from 'emailjs-com';
 import MainPage from './MainPage';
 import Admin from './Admin';
 import { db, ref, push } from './firebase';
-import  './App.css'
+import './App.css';
 
 // Your player data
 const players = [
@@ -103,7 +103,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/triller-pick-em">
       <Routes>
         <Route 
           path="/" 
