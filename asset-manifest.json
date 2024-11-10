@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/triller-pick-em/static/css/main.d3c4318f.css",
-    "main.js": "/triller-pick-em/static/js/main.be35e603.js",
+    "main.js": "/triller-pick-em/static/js/main.63467ba9.js",
     "static/js/453.94de484c.chunk.js": "/triller-pick-em/static/js/453.94de484c.chunk.js",
     "index.html": "/triller-pick-em/index.html",
     "main.d3c4318f.css.map": "/triller-pick-em/static/css/main.d3c4318f.css.map",
-    "main.be35e603.js.map": "/triller-pick-em/static/js/main.be35e603.js.map",
+    "main.63467ba9.js.map": "/triller-pick-em/static/js/main.63467ba9.js.map",
     "453.94de484c.chunk.js.map": "/triller-pick-em/static/js/453.94de484c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d3c4318f.css",
-    "static/js/main.be35e603.js"
+    "static/js/main.63467ba9.js"
   ]
 }
